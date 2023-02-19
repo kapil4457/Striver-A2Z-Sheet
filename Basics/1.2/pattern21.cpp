@@ -15,13 +15,8 @@ class Solution
 public:
     void printSquare(int n)
     {
-        int k = -1;
         for (int i = 1; i <= n; i++)
         {
-            if (i <= n)
-                k++;
-            else
-                k--;
 
             for (int j = 1; j <= n; j++)
             {
