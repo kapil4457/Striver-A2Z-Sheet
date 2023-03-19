@@ -12,9 +12,41 @@ class Solution{
         //complete the function here
         
         
-        
+        // Brute Force
         for(int i =l ;   i <= h ; i ++){
             if(A[i]==key)return i;
+        }
+        return -1;
+        
+        
+        // Optimised Approach
+        
+        while(l <= h){
+            int m = (l+h)/2;
+            if(A[m]==key)return m;
+            
+            
+            // Is left half sorted ?
+            if(A[l] <= A[m]){
+                
+                // This assures that the target lies in the lleft half
+                if(key >= A[l] && key<=A[m]){
+                    h = m-1;
+                }else{
+                    l = m+1;
+                }
+            }else{
+                //  right half is sorted 
+                
+                if(key >= A[m] && key <= A[h]){
+                    l=m+1;
+                }else{
+                    h = m-1;
+                }
+            }
+            
+           
+                
         }
         return -1;
     }
