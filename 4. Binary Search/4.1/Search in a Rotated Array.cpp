@@ -24,8 +24,8 @@ class Solution{
         while(l <= h){
             int m = (l+h)/2;
             if(A[m]==key)return m;
-            
-            
+                                        
+                                        
             // Is left half sorted ?
             if(A[l] <= A[m]){
                 
