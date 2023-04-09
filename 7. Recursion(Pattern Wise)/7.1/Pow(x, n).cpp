@@ -8,15 +8,17 @@ using namespace std;
 class Solution{
     public:
     //You need to complete this fucntion
+    
     long long power(int N,int R)
     {
-       //Your code here
-       if(R==1)return N%mod;
-       return( N%mod * power(N,R-1)%mod)%mod;
-       
-        
+       if(R==0)return 1;
+       if (R % 2 == 0)
+       {
+           long long ans=power(N, R/2)%mod;
+           return (ans%mod * ans%mod )%mod;
+       }
+       else return  (N * power(N, R - 1)%mod)%mod;
     }
-
 };
 
 //{ Driver Code Starts.
