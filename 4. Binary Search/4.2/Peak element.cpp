@@ -9,6 +9,9 @@ using namespace std;
 
 // arr: input array
 // n: size of array
+
+
+// 1 2 3 4 7 3 2 1
 class Solution
 {
     public:
