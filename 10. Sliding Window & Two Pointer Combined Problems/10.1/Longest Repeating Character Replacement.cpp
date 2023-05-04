@@ -6,41 +6,20 @@ using namespace std;
 class Solution {
   public:
     int characterReplacement(string S, int K) {
+int head =0  , tail = 0 , ans =0  , cnt[26]={};
 
-      unordered_map<char,int>m;
+for(head =0 ; head < S.length() ; head++){
+    cnt[S[head]-'A']++;
+    while(head-tail+1 - *max_element(cnt , cnt+26) >  K){
+        cnt[S[tail]-'A']--;
+        tail++;
+    }
+    ans = max(ans , head-tail+1);
+    
+    
+}
 
-      int count=INT_MIN;
-
-      int j=0,i=0;
-
-      int ans=0;
-
-      
-
-    while(j<S.length()){
-
-            m[S[j]]++;
-
-            count=max(count,m[S[j]]);
-
-        
-
-          if(j-i+1-count>K){
-
-                    m[S[i]]--;
-
-                     i++;
-
-         }
-
-        ans=max(ans,j-i+1);
-
-        j++;
-
-     }
-
-    return ans;
-
+return ans;
  }
 };
 
