@@ -8,45 +8,32 @@ class Solution {
   public:
     int totalFruits(int N, vector<int> &fruits) {
         
-        int l =0  , r = 0;
-        int type1 = -1 , type2 = -1;
-        int cnt1 = 0 , cnt2 =0 ;
-        int ans =0 ;
-        while(r < N){
-                ans = max(ans , (cnt1+cnt2));
-            if(fruits[r]!=type1 && fruits[r]!=type2){
-                ans = max(ans , (cnt1+cnt2));
-                if(type1==-1 || type2==-1){
-                    if(type1==-1){
-                        
-                    type1=fruits[r];
-                    cnt1++;
-                    }else{
-                        type2=fruits[r];
-                        cnt2++;
-                    }
-                }else{
-                ans = max(ans , (cnt1+cnt2));
-                    if(type2==fruits[r-1]){
-                        type1 =  fruits[r];
-                        cnt1=1;
-                    }else{
-                        type2 = fruits[r];
-                        cnt2=1;
-                    }
-                }
-            }else{
-                if(fruits[r]==type1){
-                    cnt1++;
-                }else{
-                    cnt2++;
-                }
-            }
+        map<int,int>ref;
+       
+        int ans = 0;
+        int head =0 , tail = 0;
+        for(head =0 ; head < N ; head++){
+            ref[fruits[head]]++;
             
-            r++;
+            if(ref.size()==2){
+               
+                ans = max(ans , head-tail+1);
+            }else if(ref.size() > 2){
+             
+             while(tail < head){
+                 ref[fruits[tail]]--;
+                 if(ref[fruits[tail]]==0){
+                     ref.erase(fruits[tail]);
+                     tail++;
+                    ans = max(ans , head-tail+1);
+                     break;
+                 }
+                 tail++;
+             }   
+            }
         }
         
-                ans = max(ans , (cnt1+cnt2));
+        if(ref.size()==1)ans+=ref[fruits[0]];
         return ans;
     }
 };
@@ -54,14 +41,13 @@ class Solution {
 //{ Driver Code Starts.
 
 int main() {
-    int t=1;
-    // cin >> t;
+    int t;
+    cin >> t;
     while (t--) {
-        int N=6;
-        // cin >> N;
-        // vector<int> fruits(N);
-        vector<int> fruits={4,2,4,4,2,3};
-        // for (int i = 0; i < N; i++) cin >> fruits[i];
+        int N;
+        cin >> N;
+        vector<int> fruits(N);
+        for (int i = 0; i < N; i++) cin >> fruits[i];
         Solution obj;
         cout << obj.totalFruits(N, fruits) << endl;
     }
