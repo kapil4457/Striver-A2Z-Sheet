@@ -145,8 +145,8 @@ struct Node
          return;
      }
      
-     dfs(root->left , ans , currPath);
-     dfs(root->right ,ans , currPath);
+     inOrder(root->left , ans , currPath);
+     inOrder(root->right ,ans , currPath);
          currPath.pop_back();
      
  }
