@@ -20,12 +20,32 @@ class Solution
      return dp[ind][prev_ind+1]=len;
      
  }
-    int longestSubsequence(int n, int a[])
+    int longestSubsequence(int n, int arr[])
     {
        // your code here
-       vector<vector<int>>dp(n , vector<int>(n+1 , -1));
-      return f(0,-1,a,n , dp);
+       
+       
+    //   memoization :
+    //   vector<vector<int>>dp(n , vector<int>(n+1 , -1));
+    //   return f(0,-1,a,n , dp);
     
+    
+    // tabulation : 
+      vector<vector<int>>dp(n+1 , vector<int>(n+1 , 0));
+      
+      for(int ind =n-1 ; ind >=0 ; ind--){
+          for(int prev_ind = ind-1 ; prev_ind >=-1; prev_ind--){
+                int len = 0 + dp[ind+1][ prev_ind+1];
+                 if(prev_ind==-1 || arr[prev_ind] < arr[ind]){
+                     len = max(len ,  1 +dp[ind+1][ind+1] );
+                 }
+                  dp[ind][prev_ind+1]=len;
+          }
+      }
+      return dp[0][0];
+      
+      
+      
        
     }
 };
