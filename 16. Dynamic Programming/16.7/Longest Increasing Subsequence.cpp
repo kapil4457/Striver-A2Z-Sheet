@@ -31,20 +31,35 @@ class Solution
     
     
     // tabulation : 
-      vector<vector<int>>dp(n+1 , vector<int>(n+1 , 0));
+    //   vector<vector<int>>dp(n+1 , vector<int>(n+1 , 0));
       
-      for(int ind =n-1 ; ind >=0 ; ind--){
-          for(int prev_ind = ind-1 ; prev_ind >=-1; prev_ind--){
-                int len = 0 + dp[ind+1][ prev_ind+1];
-                 if(prev_ind==-1 || arr[prev_ind] < arr[ind]){
-                     len = max(len ,  1 +dp[ind+1][ind+1] );
-                 }
-                  dp[ind][prev_ind+1]=len;
-          }
-      }
-      return dp[0][0];
+    //   for(int ind =n-1 ; ind >=0 ; ind--){
+    //       for(int prev_ind = ind-1 ; prev_ind >=-1; prev_ind--){
+    //             int len = 0 + dp[ind+1][ prev_ind+1];
+    //              if(prev_ind==-1 || arr[prev_ind] < arr[ind]){
+    //                  len = max(len ,  1 +dp[ind+1][ind+1] );
+    //              }
+    //               dp[ind][prev_ind+1]=len;
+    //       }
+    //   }
+    //   return dp[0][0];
       
       
+    //   Binary Search : 
+    
+    vector<int>temp;
+    temp.push_back(arr[0]);
+    for(int i =1 ; i < n;  i ++){
+        if(arr[i] > temp.back()){
+            temp.push_back(arr[i]);
+            continue;
+        }
+       int j=lower_bound(temp.begin(), temp.end(), arr[i])-temp.begin();
+               temp[j]=arr[i];
+
+    }
+    
+    return temp.size();
       
        
     }
